@@ -18,9 +18,9 @@ class ShopController extends Controller
      *
      * @group Stores API endpoints
      *
-     * @responseFile 201 storage/responses/api/stores/store.post.json
+     * @responseFile 200 storage/responses/api/stores/store.post.json
      */
-    public function store(AddShopRequest $request): JsonResponse
+    public function store(AddShopRequest $request): ShopResource
     {
         $attributes = $request->validated();
 
@@ -47,11 +47,11 @@ class ShopController extends Controller
             updated_at'
         )->where('id', $shopId)->firstOrFail();
 
-        return response()->json(new ShopResource($responseData), 201);
+        return new ShopResource($responseData);
     }
 
     /**
-     * Find stores within a specified distance (miles)
+     * Find stores within a specified distance (in miles)
      *
      * @unauthenticated
      *
@@ -63,7 +63,7 @@ class ShopController extends Controller
      *
      * @responseFile 200 storage/responses/api/stores/get.post.json
      */
-    public function index(ShowShopRequest $request): JsonResponse
+    public function index(ShowShopRequest $request): \Illuminate\Http\Resources\Json\AnonymousResourceCollection
     {
         $attributes = $request->validated();
 
@@ -82,12 +82,14 @@ class ShopController extends Controller
                 ) * .000621371192 as distance_in_miles
                ';
 
-        $nearestShop = Shop::selectRaw(
-            $query, [$attributes['longitude'], $attributes['latitude']])
+        $nearestShops = Shop::selectRaw(
+                $query,
+                [$attributes['longitude'], $attributes['latitude']]
+            )
             ->havingRaw('distance_in_miles BETWEEN 0 and ?', [$attributes['distance']])
             ->orderByRaw('distance_in_miles')
-            ->get();
+            ->paginate(10);
 
-        return response()->json(ShopResource::collection($nearestShop));
+        return ShopResource::collection($nearestShops);
     }
 }
