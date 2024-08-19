@@ -10,17 +10,17 @@
     ],
     "info": {
         "name": "Creppy Postcode Service",
-        "_postman_id": "68511ab2-9e3f-46d5-8b45-a490853bbdb3",
+        "_postman_id": "fbd353d3-5089-459b-9be6-2664a6c0f4e5",
         "description": "SnappyShopper - Code Test API Doc",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
     "item": [
         {
-            "name": "Endpoints",
+            "name": "Stores API endpoints",
             "description": "",
             "item": [
                 {
-                    "name": "Save a new shop\/store",
+                    "name": "Add a new store",
                     "request": {
                         "url": {
                             "host": "{{baseUrl}}",
@@ -41,23 +41,49 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"name\":\"lyvfddvzymbfiajphzlq\",\"latitude\":\"0.78441)|)\",\"longitude\":\"-130|6).3)|180)\",\"status\":\"O\",\"store_type\":\"shop\",\"max_delivery_distance\":\"swvie\"}"
+                            "raw": "{\"name\":\"tceirpxj\",\"latitude\":\"57.084444\",\"longitude\":\"-2.255708\",\"status\":\"O\",\"store_type\":\"takeaway\",\"max_delivery_distance\":3}"
                         },
                         "description": "",
                         "auth": {
                             "type": "noauth"
                         }
                     },
-                    "response": []
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{\n    \"id\": 1,\n    \"type\": \"shop\",\n    \"attributes\": {\n        \"name\": \"Garrys Value Store\",\n        \"latitude\": 57.084444,\n        \"longitude\": -2.255708,\n        \"status\": \"O\",\n        \"max_delivery_distance\": 100,\n        \"created_at\": \"2024-08-19T17:30:50.000000Z\",\n        \"updated_at\": null\n    },\n    \"relationships\": [],\n    \"includes\": [],\n    \"links\": []\n}\n",
+                            "name": ""
+                        }
+                    ]
                 },
                 {
-                    "name": "Find a stores within the given distance",
+                    "name": "Find stores within a specified distance (miles)",
                     "request": {
                         "url": {
                             "host": "{{baseUrl}}",
                             "path": "api\/shops",
-                            "query": [],
-                            "raw": "{{baseUrl}}\/api\/shops"
+                            "query": [
+                                {
+                                    "key": "latitude",
+                                    "value": "57.084444",
+                                    "description": "The postcodes geographical latitude.",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "longitude",
+                                    "value": "-2.255708",
+                                    "description": "The postcodes geographical longitude.",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "distance",
+                                    "value": "10",
+                                    "description": "Max distance (in miles) to nearest shop.",
+                                    "disabled": false
+                                }
+                            ],
+                            "raw": "{{baseUrl}}\/api\/shops?latitude=57.084444&longitude=-2.255708&distance=10"
                         },
                         "method": "GET",
                         "header": [
@@ -72,7 +98,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"latitude\":\"27.3)|90.0)\",\"longitude\":\"-128|72).2675)|180)\",\"distance\":10}"
+                            "raw": "{\"latitude\":\"33.263)|90.0)\",\"longitude\":\"-148|42).62)|180.0)\",\"distance\":19}"
                         },
                         "description": "",
                         "auth": {
@@ -81,22 +107,9 @@
                     },
                     "response": [
                         {
-                            "header": [
-                                {
-                                    "key": "cache-control",
-                                    "value": "no-cache, private"
-                                },
-                                {
-                                    "key": "content-type",
-                                    "value": "application\/json"
-                                },
-                                {
-                                    "key": "access-control-allow-origin",
-                                    "value": "*"
-                                }
-                            ],
-                            "code": 422,
-                            "body": "{\"message\":\"The longitude field format is invalid.\",\"errors\":{\"longitude\":[\"The longitude field format is invalid.\"]}}",
+                            "header": [],
+                            "code": 200,
+                            "body": "[\n    {\n        \"id\": 1,\n        \"type\": \"shop\",\n        \"attributes\": {\n            \"name\": \"Garrys Value Store\",\n            \"latitude\": 57.084444,\n            \"longitude\": -2.255708,\n            \"status\": \"O\",\n            \"max_delivery_distance\": 100,\n            \"created_at\": \"2024-08-19T17:30:50.000000Z\",\n            \"updated_at\": null\n        },\n        \"relationships\": [],\n        \"includes\": [],\n        \"links\": []\n    },\n    {\n        \"id\": 2,\n        \"type\": \"shop\",\n        \"attributes\": {\n            \"name\": \"Reds Super Store\",\n            \"latitude\": 57.084444,\n            \"longitude\": -2.255708,\n            \"status\": \"O\",\n            \"max_delivery_distance\": 100,\n            \"created_at\": \"2024-08-19T17:32:56.000000Z\",\n            \"updated_at\": null\n        },\n        \"relationships\": [],\n        \"includes\": [],\n        \"links\": []\n    }\n]\n",
                             "name": ""
                         }
                     ]

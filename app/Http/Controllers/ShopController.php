@@ -6,15 +6,21 @@ use App\Http\Requests\AddShopRequest;
 use App\Http\Requests\ShowShopRequest;
 use App\Http\Resources\ShopResource;
 use App\Models\Shop;
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 
 class ShopController extends Controller
 {
     /**
      * Add a new store
+     *
+     * @unauthenticated
+     *
+     * @group Stores API endpoints
+     *
+     * @responseFile 201 storage/responses/api/stores/store.post.json
      */
-    public function store(AddShopRequest $request): ShopResource
+    public function store(AddShopRequest $request): JsonResponse
     {
         $attributes = $request->validated();
 
@@ -41,29 +47,47 @@ class ShopController extends Controller
             updated_at'
         )->where('id', $shopId)->firstOrFail();
 
-        return new ShopResource($responseData);
+        return response()->json(new ShopResource($responseData), 201);
     }
 
     /**
-     * Find a stores within the given distance
+     * Find stores within a specified distance (miles)
+     *
+     * @unauthenticated
+     *
+     * @group Stores API endpoints
+     *
+     * @queryParam latitude number required The postcodes geographical latitude. Example: 57.084444
+     * @queryParam longitude number required The postcodes geographical longitude. Example: -2.255708
+     * @queryParam distance number required Max distance (in miles) to nearest shop. Example: 10
+     *
+     * @responseFile 200 storage/responses/api/stores/get.post.json
      */
-    public function show(ShowShopRequest $request): AnonymousResourceCollection
+    public function index(ShowShopRequest $request): JsonResponse
     {
         $attributes = $request->validated();
 
-        $query = 'SELECT id, name, ST_Distance_Sphere(
-                        POINT(?, ?) ,
-                        POINT(ST_X(geo_coordinates), ST_Y(geo_coordinates))
-                    ) * .000621371192 as distance_in_miles
-                 FROM shops
-                 HAVING `distance_in_miles` BETWEEN 0 and ?
-                 ORDER BY distance_in_miles';
+        $query = '
+                id,
+                name,
+                status,
+                max_delivery_distance,
+                created_at,
+                updated_at,
+                ST_X(geo_coordinates) as longitude,
+                ST_Y(geo_coordinates) as latitude
+                ,ST_Distance_Sphere(
+                    POINT(?, ?) ,
+                    POINT(ST_X(geo_coordinates), ST_Y(geo_coordinates))
+                ) * .000621371192 as distance_in_miles
+               ';
 
-        // Use prepared statements to prevent SQL injection (security)
-        $result = DB::select($query, [$attributes['longitude'], $attributes['latitude'], $attributes['distance']]);
+        $nearestShop = Shop::selectRaw(
+            $query, [$attributes['longitude'], $attributes['latitude']])
+            ->havingRaw('distance_in_miles BETWEEN 0 and ?', [$attributes['distance']])
+            ->orderByRaw('distance_in_miles')
+            ->get();
 
-        $nearestShop = Shop::findMany(collect($result)->pluck('id'));
-
-        return ShopResource::collection($nearestShop);
+        return response()->json(ShopResource::collection($nearestShop));
     }
 }

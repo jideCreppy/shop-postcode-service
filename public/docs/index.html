@@ -66,16 +66,16 @@
                     <a href="#authenticating-requests">Authenticating requests</a>
                 </li>
                             </ul>
-                    <ul id="tocify-header-endpoints" class="tocify-header">
-                <li class="tocify-item level-1" data-unique="endpoints">
-                    <a href="#endpoints">Endpoints</a>
+                    <ul id="tocify-header-stores-api-endpoints" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="stores-api-endpoints">
+                    <a href="#stores-api-endpoints">Stores API endpoints</a>
                 </li>
-                                    <ul id="tocify-subheader-endpoints" class="tocify-subheader">
-                                                    <li class="tocify-item level-2" data-unique="endpoints-POSTapi-shops">
-                                <a href="#endpoints-POSTapi-shops">Save a new shop/store</a>
+                                    <ul id="tocify-subheader-stores-api-endpoints" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="stores-api-endpoints-POSTapi-shops">
+                                <a href="#stores-api-endpoints-POSTapi-shops">Add a new store</a>
                             </li>
-                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-shops">
-                                <a href="#endpoints-GETapi-shops">Find a stores within the given distance</a>
+                                                                                <li class="tocify-item level-2" data-unique="stores-api-endpoints-GETapi-shops">
+                                <a href="#stores-api-endpoints-GETapi-shops">Find stores within a specified distance (miles)</a>
                             </li>
                                                                         </ul>
                             </ul>
@@ -107,11 +107,11 @@ You can switch the language used with the tabs at the top right (or from the nav
         <h1 id="authenticating-requests">Authenticating requests</h1>
 <p>This API is not authenticated.</p>
 
-        <h1 id="endpoints">Endpoints</h1>
+        <h1 id="stores-api-endpoints">Stores API endpoints</h1>
 
     
 
-                                <h2 id="endpoints-POSTapi-shops">Save a new shop/store</h2>
+                                <h2 id="stores-api-endpoints-POSTapi-shops">Add a new store</h2>
 
 <p>
 </p>
@@ -128,12 +128,12 @@ You can switch the language used with the tabs at the top right (or from the nav
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"name\": \"lyvfddvzymbfiajphzlq\",
-    \"latitude\": \"0.78441)|)\",
-    \"longitude\": \"-130|6).3)|180)\",
+    \"name\": \"tceirpxj\",
+    \"latitude\": \"57.084444\",
+    \"longitude\": \"-2.255708\",
     \"status\": \"O\",
-    \"store_type\": \"shop\",
-    \"max_delivery_distance\": \"swvie\"
+    \"store_type\": \"takeaway\",
+    \"max_delivery_distance\": 3
 }"
 </code></pre></div>
 
@@ -149,12 +149,12 @@ const headers = {
 };
 
 let body = {
-    "name": "lyvfddvzymbfiajphzlq",
-    "latitude": "0.78441)|)",
-    "longitude": "-130|6).3)|180)",
+    "name": "tceirpxj",
+    "latitude": "57.084444",
+    "longitude": "-2.255708",
     "status": "O",
-    "store_type": "shop",
-    "max_delivery_distance": "swvie"
+    "store_type": "takeaway",
+    "max_delivery_distance": 3
 };
 
 fetch(url, {
@@ -166,7 +166,29 @@ fetch(url, {
 </span>
 
 <span id="example-responses-POSTapi-shops">
-</span>
+            <blockquote>
+            <p>Example response (201):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;id&quot;: 1,
+    &quot;type&quot;: &quot;shop&quot;,
+    &quot;attributes&quot;: {
+        &quot;name&quot;: &quot;Garrys Value Store&quot;,
+        &quot;latitude&quot;: 57.084444,
+        &quot;longitude&quot;: -2.255708,
+        &quot;status&quot;: &quot;O&quot;,
+        &quot;max_delivery_distance&quot;: 100,
+        &quot;created_at&quot;: &quot;2024-08-19T17:30:50.000000Z&quot;,
+        &quot;updated_at&quot;: null
+    },
+    &quot;relationships&quot;: [],
+    &quot;includes&quot;: [],
+    &quot;links&quot;: []
+}</code>
+ </pre>
+    </span>
 <span id="execution-results-POSTapi-shops" hidden>
     <blockquote>Received response<span
                 id="execution-response-status-POSTapi-shops"></span>:
@@ -243,10 +265,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="name"                data-endpoint="POSTapi-shops"
-               value="lyvfddvzymbfiajphzlq"
+               value="tceirpxj"
                data-component="body">
     <br>
-<p>Must be at least 5 characters. Must not be greater than 100 characters. Example: <code>lyvfddvzymbfiajphzlq</code></p>
+<p>Must be at least 5 characters. Must not be greater than 100 characters. Example: <code>tceirpxj</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>latitude</code></b>&nbsp;&nbsp;
@@ -254,10 +276,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="latitude"                data-endpoint="POSTapi-shops"
-               value="0.78441)|)"
+               value="57.084444"
                data-component="body">
     <br>
-<p>Must match the regex /^[-]?(([0-8]?[0-9]).(\d+))|(90(.0+)?)$/. Example: <code>0.78441)|)</code></p>
+<p>The postcodes latitude. Must match the regex /^[-]?(([0-8]?[0-9]).(\d+))|(90(.0+)?)$/. Example: <code>57.084444</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>longitude</code></b>&nbsp;&nbsp;
@@ -265,10 +287,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                               name="longitude"                data-endpoint="POSTapi-shops"
-               value="-130|6).3)|180)"
+               value="-2.255708"
                data-component="body">
     <br>
-<p>Must match the regex /^[-]?((((1[0-7][0-9])|([0-9]?[0-9])).(\d+))|180(.0+)?)$/. Example: <code>-130|6).3)|180)</code></p>
+<p>The postcodes longitude. Must match the regex /^[-]?((((1[0-7][0-9])|([0-9]?[0-9])).(\d+))|180(.0+)?)$/. Example: <code>-2.255708</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>status</code></b>&nbsp;&nbsp;
@@ -289,27 +311,27 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="store_type"                data-endpoint="POSTapi-shops"
-               value="shop"
+               value="takeaway"
                data-component="body">
     <br>
-<p>Example: <code>shop</code></p>
+<p>Example: <code>takeaway</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>takeaway</code></li> <li><code>shop</code></li> <li><code>restaurant</code></li></ul>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>max_delivery_distance</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
+<small>integer</small>&nbsp;
  &nbsp;
-                <input type="text" style="display: none"
-                              name="max_delivery_distance"                data-endpoint="POSTapi-shops"
-               value="swvie"
+                <input type="number" style="display: none"
+               step="any"               name="max_delivery_distance"                data-endpoint="POSTapi-shops"
+               value="3"
                data-component="body">
     <br>
-<p>Must be at least 1 character. Must not be greater than 255 characters. Example: <code>swvie</code></p>
+<p>Must be at least 0. Must not be greater than 100. Example: <code>3</code></p>
         </div>
         </form>
 
-                    <h2 id="endpoints-GETapi-shops">Find a stores within the given distance</h2>
+                    <h2 id="stores-api-endpoints-GETapi-shops">Find stores within a specified distance (miles)</h2>
 
 <p>
 </p>
@@ -322,13 +344,13 @@ Must be one of:
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/shops" \
+    --get "http://localhost/api/shops?latitude=57.084444&amp;longitude=-2.255708&amp;distance=10" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"latitude\": \"27.3)|90.0)\",
-    \"longitude\": \"-128|72).2675)|180)\",
-    \"distance\": 10
+    \"latitude\": \"33.263)|90.0)\",
+    \"longitude\": \"-148|42).62)|180.0)\",
+    \"distance\": 19
 }"
 </code></pre></div>
 
@@ -338,15 +360,23 @@ Must be one of:
     "http://localhost/api/shops"
 );
 
+const params = {
+    "latitude": "57.084444",
+    "longitude": "-2.255708",
+    "distance": "10",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
 const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
 
 let body = {
-    "latitude": "27.3)|90.0)",
-    "longitude": "-128|72).2675)|180)",
-    "distance": 10
+    "latitude": "33.263)|90.0)",
+    "longitude": "-148|42).62)|180.0)",
+    "distance": 19
 };
 
 fetch(url, {
@@ -359,25 +389,44 @@ fetch(url, {
 
 <span id="example-responses-GETapi-shops">
             <blockquote>
-            <p>Example response (422):</p>
+            <p>Example response (200):</p>
         </blockquote>
-                <details class="annotation">
-            <summary style="cursor: pointer;">
-                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
-            </summary>
-            <pre><code class="language-http">cache-control: no-cache, private
-content-type: application/json
-access-control-allow-origin: *
- </code></pre></details>         <pre>
+                <pre>
 
-<code class="language-json" style="max-height: 300px;">{
-    &quot;message&quot;: &quot;The longitude field format is invalid.&quot;,
-    &quot;errors&quot;: {
-        &quot;longitude&quot;: [
-            &quot;The longitude field format is invalid.&quot;
-        ]
+<code class="language-json" style="max-height: 300px;">[
+    {
+        &quot;id&quot;: 1,
+        &quot;type&quot;: &quot;shop&quot;,
+        &quot;attributes&quot;: {
+            &quot;name&quot;: &quot;Garrys Value Store&quot;,
+            &quot;latitude&quot;: 57.084444,
+            &quot;longitude&quot;: -2.255708,
+            &quot;status&quot;: &quot;O&quot;,
+            &quot;max_delivery_distance&quot;: 100,
+            &quot;created_at&quot;: &quot;2024-08-19T17:30:50.000000Z&quot;,
+            &quot;updated_at&quot;: null
+        },
+        &quot;relationships&quot;: [],
+        &quot;includes&quot;: [],
+        &quot;links&quot;: []
+    },
+    {
+        &quot;id&quot;: 2,
+        &quot;type&quot;: &quot;shop&quot;,
+        &quot;attributes&quot;: {
+            &quot;name&quot;: &quot;Reds Super Store&quot;,
+            &quot;latitude&quot;: 57.084444,
+            &quot;longitude&quot;: -2.255708,
+            &quot;status&quot;: &quot;O&quot;,
+            &quot;max_delivery_distance&quot;: 100,
+            &quot;created_at&quot;: &quot;2024-08-19T17:32:56.000000Z&quot;,
+            &quot;updated_at&quot;: null
+        },
+        &quot;relationships&quot;: [],
+        &quot;includes&quot;: [],
+        &quot;links&quot;: []
     }
-}</code>
+]</code>
  </pre>
     </span>
 <span id="execution-results-GETapi-shops" hidden>
@@ -449,17 +498,51 @@ You can check the Dev Tools console for debugging information.</code></pre>
     <br>
 <p>Example: <code>application/json</code></p>
             </div>
-                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+                            <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>latitude</code></b>&nbsp;&nbsp;
+<small>number</small>&nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="latitude"                data-endpoint="GETapi-shops"
+               value="57.084444"
+               data-component="query">
+    <br>
+<p>The postcodes geographical latitude. Example: <code>57.084444</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>longitude</code></b>&nbsp;&nbsp;
+<small>number</small>&nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="longitude"                data-endpoint="GETapi-shops"
+               value="-2.255708"
+               data-component="query">
+    <br>
+<p>The postcodes geographical longitude. Example: <code>-2.255708</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>distance</code></b>&nbsp;&nbsp;
+<small>number</small>&nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="distance"                data-endpoint="GETapi-shops"
+               value="10"
+               data-component="query">
+    <br>
+<p>Max distance (in miles) to nearest shop. Example: <code>10</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>latitude</code></b>&nbsp;&nbsp;
 <small>string</small>&nbsp;
  &nbsp;
                 <input type="text" style="display: none"
                               name="latitude"                data-endpoint="GETapi-shops"
-               value="27.3)|90.0)"
+               value="33.263)|90.0)"
                data-component="body">
     <br>
-<p>Must match the regex /^[-]?(([0-8]?[0-9]).(\d+))|(90(.0+)?)$/. Example: <code>27.3)|90.0)</code></p>
+<p>Must match the regex /^[-]?(([0-8]?[0-9]).(\d+))|(90(.0+)?)$/. Example: <code>33.263)|90.0)</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>longitude</code></b>&nbsp;&nbsp;
@@ -467,10 +550,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                               name="longitude"                data-endpoint="GETapi-shops"
-               value="-128|72).2675)|180)"
+               value="-148|42).62)|180.0)"
                data-component="body">
     <br>
-<p>Must match the regex /^[-]?((((1[0-7][0-9])|([0-9]?[0-9])).(\d+))|180(.0+)?)$/. Example: <code>-128|72).2675)|180)</code></p>
+<p>Must match the regex /^[-]?((((1[0-7][0-9])|([0-9]?[0-9])).(\d+))|180(.0+)?)$/. Example: <code>-148|42).62)|180.0)</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>distance</code></b>&nbsp;&nbsp;
@@ -478,10 +561,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="distance"                data-endpoint="GETapi-shops"
-               value="10"
+               value="19"
                data-component="body">
     <br>
-<p>Must not be greater than 100. Example: <code>10</code></p>
+<p>Must not be greater than 100. Example: <code>19</code></p>
         </div>
         </form>
 

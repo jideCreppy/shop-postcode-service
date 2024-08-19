@@ -70,7 +70,7 @@ class PostCodeDownload extends Command
                 $today = now();
 
                 foreach ($rows as $key => $value) {
-                    $postcodes[$key]['postcode'] = $value['pcd2'];
+                    $postcodes[$key]['postcode'] = htmlspecialchars($value['pcd2'], ENT_QUOTES, 'UTF-8', false);
                     $postcodes[$key]['geo_coordinates'] = DB::raw("ST_SRID(POINT({$value['lat']}, {$value['long']}), 4326)");
                     $postcodes[$key]['created_at'] = $today;
                 }

@@ -47,4 +47,18 @@ class AddShopRequest extends FormRequest
             'status.in' => 'Invalid Status value. Allowed values = X or O.',
         ];
     }
+
+    public function bodyParameters()
+    {
+        return [
+            'latitude' => [
+                'description' => 'The postcodes latitude.',
+                'example' => '57.084444',
+            ],
+            'longitude' => [
+                'description' => 'The postcodes longitude.',
+                'example' => '-2.255708',
+            ],
+        ];
+    }
 }
