@@ -14,7 +14,7 @@ paths:
       description: ''
       parameters: []
       responses:
-        201:
+        200:
           description: ''
           content:
             application/json:
@@ -86,7 +86,7 @@ paths:
                 name:
                   type: string
                   description: 'Must be at least 5 characters. Must not be greater than 100 characters.'
-                  example: tceirpxj
+                  example: cfgermpfw
                 latitude:
                   type: string
                   description: 'The postcodes latitude. Must match the regex /^[-]?(([0-8]?[0-9])\.(\d+))|(90(\.0+)?)$/.'
@@ -98,14 +98,14 @@ paths:
                 status:
                   type: string
                   description: ''
-                  example: O
+                  example: X
                   enum:
                     - X
                     - O
                 store_type:
                   type: string
                   description: ''
-                  example: takeaway
+                  example: shop
                   enum:
                     - takeaway
                     - shop
@@ -113,7 +113,7 @@ paths:
                 max_delivery_distance:
                   type: integer
                   description: 'Must be at least 0. Must not be greater than 100.'
-                  example: 3
+                  example: 7
               required:
                 - name
                 - latitude
@@ -122,8 +122,8 @@ paths:
                 - max_delivery_distance
       security: []
     get:
-      summary: 'Find stores within a specified distance (miles)'
-      operationId: findStoresWithinASpecifiedDistancemiles
+      summary: 'Find stores within a specified distance (in miles)'
+      operationId: findStoresWithinASpecifiedDistanceinMiles
       description: ''
       parameters:
         -
@@ -206,15 +206,15 @@ paths:
                 latitude:
                   type: string
                   description: 'Must match the regex /^[-]?(([0-8]?[0-9])\.(\d+))|(90(\.0+)?)$/.'
-                  example: 33.263)|90.0)
+                  example: 9.5)|)
                 longitude:
                   type: string
                   description: 'Must match the regex /^[-]?((((1[0-7][0-9])|([0-9]?[0-9]))\.(\d+))|180(\.0+)?)$/.'
-                  example: '-148|42).62)|180.0)'
+                  example: '-143|52).44)|180.00)'
                 distance:
                   type: number
                   description: 'Must not be greater than 100.'
-                  example: 19
+                  example: 25
               required:
                 - latitude
                 - distance

@@ -75,7 +75,7 @@
                                 <a href="#stores-api-endpoints-POSTapi-shops">Add a new store</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="stores-api-endpoints-GETapi-shops">
-                                <a href="#stores-api-endpoints-GETapi-shops">Find stores within a specified distance (miles)</a>
+                                <a href="#stores-api-endpoints-GETapi-shops">Find stores within a specified distance (in miles)</a>
                             </li>
                                                                         </ul>
                             </ul>
@@ -128,12 +128,12 @@ You can switch the language used with the tabs at the top right (or from the nav
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"name\": \"tceirpxj\",
+    \"name\": \"cfgermpfw\",
     \"latitude\": \"57.084444\",
     \"longitude\": \"-2.255708\",
-    \"status\": \"O\",
-    \"store_type\": \"takeaway\",
-    \"max_delivery_distance\": 3
+    \"status\": \"X\",
+    \"store_type\": \"shop\",
+    \"max_delivery_distance\": 7
 }"
 </code></pre></div>
 
@@ -149,12 +149,12 @@ const headers = {
 };
 
 let body = {
-    "name": "tceirpxj",
+    "name": "cfgermpfw",
     "latitude": "57.084444",
     "longitude": "-2.255708",
-    "status": "O",
-    "store_type": "takeaway",
-    "max_delivery_distance": 3
+    "status": "X",
+    "store_type": "shop",
+    "max_delivery_distance": 7
 };
 
 fetch(url, {
@@ -167,7 +167,7 @@ fetch(url, {
 
 <span id="example-responses-POSTapi-shops">
             <blockquote>
-            <p>Example response (201):</p>
+            <p>Example response (200):</p>
         </blockquote>
                 <pre>
 
@@ -265,10 +265,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="name"                data-endpoint="POSTapi-shops"
-               value="tceirpxj"
+               value="cfgermpfw"
                data-component="body">
     <br>
-<p>Must be at least 5 characters. Must not be greater than 100 characters. Example: <code>tceirpxj</code></p>
+<p>Must be at least 5 characters. Must not be greater than 100 characters. Example: <code>cfgermpfw</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>latitude</code></b>&nbsp;&nbsp;
@@ -298,10 +298,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="status"                data-endpoint="POSTapi-shops"
-               value="O"
+               value="X"
                data-component="body">
     <br>
-<p>Example: <code>O</code></p>
+<p>Example: <code>X</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>X</code></li> <li><code>O</code></li></ul>
         </div>
@@ -311,10 +311,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="store_type"                data-endpoint="POSTapi-shops"
-               value="takeaway"
+               value="shop"
                data-component="body">
     <br>
-<p>Example: <code>takeaway</code></p>
+<p>Example: <code>shop</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>takeaway</code></li> <li><code>shop</code></li> <li><code>restaurant</code></li></ul>
         </div>
@@ -324,14 +324,14 @@ Must be one of:
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="max_delivery_distance"                data-endpoint="POSTapi-shops"
-               value="3"
+               value="7"
                data-component="body">
     <br>
-<p>Must be at least 0. Must not be greater than 100. Example: <code>3</code></p>
+<p>Must be at least 0. Must not be greater than 100. Example: <code>7</code></p>
         </div>
         </form>
 
-                    <h2 id="stores-api-endpoints-GETapi-shops">Find stores within a specified distance (miles)</h2>
+                    <h2 id="stores-api-endpoints-GETapi-shops">Find stores within a specified distance (in miles)</h2>
 
 <p>
 </p>
@@ -348,9 +348,9 @@ Must be one of:
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"latitude\": \"33.263)|90.0)\",
-    \"longitude\": \"-148|42).62)|180.0)\",
-    \"distance\": 19
+    \"latitude\": \"9.5)|)\",
+    \"longitude\": \"-143|52).44)|180.00)\",
+    \"distance\": 25
 }"
 </code></pre></div>
 
@@ -374,9 +374,9 @@ const headers = {
 };
 
 let body = {
-    "latitude": "33.263)|90.0)",
-    "longitude": "-148|42).62)|180.0)",
-    "distance": 19
+    "latitude": "9.5)|)",
+    "longitude": "-143|52).44)|180.00)",
+    "distance": 25
 };
 
 fetch(url, {
@@ -539,10 +539,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="latitude"                data-endpoint="GETapi-shops"
-               value="33.263)|90.0)"
+               value="9.5)|)"
                data-component="body">
     <br>
-<p>Must match the regex /^[-]?(([0-8]?[0-9]).(\d+))|(90(.0+)?)$/. Example: <code>33.263)|90.0)</code></p>
+<p>Must match the regex /^[-]?(([0-8]?[0-9]).(\d+))|(90(.0+)?)$/. Example: <code>9.5)|)</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>longitude</code></b>&nbsp;&nbsp;
@@ -550,10 +550,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                               name="longitude"                data-endpoint="GETapi-shops"
-               value="-148|42).62)|180.0)"
+               value="-143|52).44)|180.00)"
                data-component="body">
     <br>
-<p>Must match the regex /^[-]?((((1[0-7][0-9])|([0-9]?[0-9])).(\d+))|180(.0+)?)$/. Example: <code>-148|42).62)|180.0)</code></p>
+<p>Must match the regex /^[-]?((((1[0-7][0-9])|([0-9]?[0-9])).(\d+))|180(.0+)?)$/. Example: <code>-143|52).44)|180.00)</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>distance</code></b>&nbsp;&nbsp;
@@ -561,10 +561,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="distance"                data-endpoint="GETapi-shops"
-               value="19"
+               value="25"
                data-component="body">
     <br>
-<p>Must not be greater than 100. Example: <code>19</code></p>
+<p>Must not be greater than 100. Example: <code>25</code></p>
         </div>
         </form>
 

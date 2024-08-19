@@ -47,25 +47,20 @@ class PostCodeDownload extends Command
         $fileName = Str(config('services.postcode.data.url'))->afterLast('/');
         $finalPath = storage_path().'/app/public/postcode-data-'.$fileName;
 
-        // Using smaller downloaded file to parse and store in the database.
+        # Using a smaller downloaded file sample to parse and store in the database.
         $csvPath = storage_path().'/app/public/postcodes/Data/multi_csv/ONSPD_NOV_2022_UK_AB.csv';
 
-        try {
-            $progress->advance();
-            $this->beginDownload($finalPath);
-        } catch (Exception $e) {
-            warning('Failed downloading postcode data'.$e->getMessage());
-            exit;
-        }
+        $this->beginDownload($finalPath);
 
         $progress->advance();
 
+        # TODO covert to service and add unit test
         SimpleExcelReader::create($csvPath)
             ->getRows()
             ->skip(1)
             ->values()
-            ->chunk(1)
-            ->each(function ($rows) { // Account for memory usage performance. Hence, use Lazy collections.
+            ->chunk(100)
+            ->each(function ($rows) { # Account for memory usage performance. Hence, use Lazy collections.
                 $postcodes = [];
                 $today = now();
 
@@ -91,14 +86,19 @@ class PostCodeDownload extends Command
         copy(config('services.postcode.data.url'), $finalPath);
 
         $archiveHandler = new ZipArchive;
-        $zippedFile = $archiveHandler->open($finalPath);
 
-        if ($zippedFile === true) {
-            $archiveHandler->extractTo(storage_path().'/app/public/postcodes/');
-            $archiveHandler->close();
-            info('Unzip operation successful!');
-        } else {
-            warning('Unzip operation failed.');
+        try {
+            $zippedFile = $archiveHandler->open($finalPath);
+            if ($zippedFile === true) {
+                $archiveHandler->extractTo(storage_path().'/app/public/postcodes/');
+                $archiveHandler->close();
+                info('Unzip operation successful!');
+            } else {
+                warning('Unzip operation failed.');
+                exit;
+            }
+        } catch (Exception $e) {
+            warning('Failed downloading postcode data'.$e->getMessage());
             exit;
         }
     }

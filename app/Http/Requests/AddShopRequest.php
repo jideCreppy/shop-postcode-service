@@ -27,7 +27,7 @@ class AddShopRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'min:5', 'max:100'],
             'latitude' => ['required', 'regex:/^[-]?(([0-8]?[0-9])\.(\d+))|(90(\.0+)?)$/'],
-            'longitude' => ['string', 'regex:/^[-]?((((1[0-7][0-9])|([0-9]?[0-9]))\.(\d+))|180(\.0+)?)$/'],
+            'longitude' => ['required', 'regex:/^[-]?((((1[0-7][0-9])|([0-9]?[0-9]))\.(\d+))|180(\.0+)?)$/'],
             'status' => ['required', 'in:X,O'],
             'store_type' => ['required', Rule::enum(StoreTypes::class)],
             'max_delivery_distance' => ['required', 'numeric', 'integer', 'min:0', 'max:100'],

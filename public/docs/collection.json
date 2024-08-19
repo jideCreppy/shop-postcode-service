@@ -10,7 +10,7 @@
     ],
     "info": {
         "name": "Creppy Postcode Service",
-        "_postman_id": "fbd353d3-5089-459b-9be6-2664a6c0f4e5",
+        "_postman_id": "768d79ce-4465-43d5-a560-a8dcc32e9196",
         "description": "SnappyShopper - Code Test API Doc",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -41,7 +41,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"name\":\"tceirpxj\",\"latitude\":\"57.084444\",\"longitude\":\"-2.255708\",\"status\":\"O\",\"store_type\":\"takeaway\",\"max_delivery_distance\":3}"
+                            "raw": "{\"name\":\"cfgermpfw\",\"latitude\":\"57.084444\",\"longitude\":\"-2.255708\",\"status\":\"X\",\"store_type\":\"shop\",\"max_delivery_distance\":7}"
                         },
                         "description": "",
                         "auth": {
@@ -51,14 +51,14 @@
                     "response": [
                         {
                             "header": [],
-                            "code": 201,
+                            "code": 200,
                             "body": "{\n    \"id\": 1,\n    \"type\": \"shop\",\n    \"attributes\": {\n        \"name\": \"Garrys Value Store\",\n        \"latitude\": 57.084444,\n        \"longitude\": -2.255708,\n        \"status\": \"O\",\n        \"max_delivery_distance\": 100,\n        \"created_at\": \"2024-08-19T17:30:50.000000Z\",\n        \"updated_at\": null\n    },\n    \"relationships\": [],\n    \"includes\": [],\n    \"links\": []\n}\n",
                             "name": ""
                         }
                     ]
                 },
                 {
-                    "name": "Find stores within a specified distance (miles)",
+                    "name": "Find stores within a specified distance (in miles)",
                     "request": {
                         "url": {
                             "host": "{{baseUrl}}",
@@ -98,7 +98,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"latitude\":\"33.263)|90.0)\",\"longitude\":\"-148|42).62)|180.0)\",\"distance\":19}"
+                            "raw": "{\"latitude\":\"9.5)|)\",\"longitude\":\"-143|52).44)|180.00)\",\"distance\":25}"
                         },
                         "description": "",
                         "auth": {

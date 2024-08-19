@@ -6,7 +6,7 @@ use App\Http\Requests\AddShopRequest;
 use App\Http\Requests\ShowShopRequest;
 use App\Http\Resources\ShopResource;
 use App\Models\Shop;
-use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\DB;
 
 class ShopController extends Controller
@@ -63,7 +63,7 @@ class ShopController extends Controller
      *
      * @responseFile 200 storage/responses/api/stores/get.post.json
      */
-    public function index(ShowShopRequest $request): \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+    public function index(ShowShopRequest $request): AnonymousResourceCollection
     {
         $attributes = $request->validated();
 
@@ -75,20 +75,20 @@ class ShopController extends Controller
                 created_at,
                 updated_at,
                 ST_X(geo_coordinates) as longitude,
-                ST_Y(geo_coordinates) as latitude
-                ,ST_Distance_Sphere(
+                ST_Y(geo_coordinates) as latitude,
+                ST_Distance_Sphere(
                     POINT(?, ?) ,
                     POINT(ST_X(geo_coordinates), ST_Y(geo_coordinates))
                 ) * .000621371192 as distance_in_miles
                ';
 
         $nearestShops = Shop::selectRaw(
-                $query,
-                [$attributes['longitude'], $attributes['latitude']]
-            )
+            $query,
+            [$attributes['longitude'], $attributes['latitude']]
+        )
             ->havingRaw('distance_in_miles BETWEEN 0 and ?', [$attributes['distance']])
             ->orderByRaw('distance_in_miles')
-            ->paginate(10);
+            ->paginate();
 
         return ShopResource::collection($nearestShops);
     }
