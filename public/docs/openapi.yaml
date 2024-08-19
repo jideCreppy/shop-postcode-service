@@ -1,0 +1,122 @@
+openapi: 3.0.3
+info:
+  title: 'Creppy Postcode Service'
+  description: 'SnappyShopper - Code Test API Doc'
+  version: 1.0.0
+servers:
+  -
+    url: 'http://localhost'
+paths:
+  /api/shops:
+    post:
+      summary: 'Save a new shop/store'
+      operationId: saveANewShopstore
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'Must be at least 5 characters. Must not be greater than 100 characters.'
+                  example: lyvfddvzymbfiajphzlq
+                latitude:
+                  type: string
+                  description: 'Must match the regex /^[-]?(([0-8]?[0-9])\.(\d+))|(90(\.0+)?)$/.'
+                  example: 0.78441)|)
+                longitude:
+                  type: string
+                  description: 'Must match the regex /^[-]?((((1[0-7][0-9])|([0-9]?[0-9]))\.(\d+))|180(\.0+)?)$/.'
+                  example: '-130|6).3)|180)'
+                status:
+                  type: string
+                  description: ''
+                  example: O
+                  enum:
+                    - X
+                    - O
+                store_type:
+                  type: string
+                  description: ''
+                  example: shop
+                  enum:
+                    - takeaway
+                    - shop
+                    - restaurant
+                max_delivery_distance:
+                  type: string
+                  description: 'Must be at least 1 character. Must not be greater than 255 characters.'
+                  example: swvie
+              required:
+                - name
+                - latitude
+                - status
+                - store_type
+                - max_delivery_distance
+      security: []
+    get:
+      summary: 'Find a stores within the given distance'
+      operationId: findAStoresWithinTheGivenDistance
+      description: ''
+      parameters: []
+      responses:
+        422:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'The longitude field format is invalid.'
+                  errors:
+                    longitude:
+                      - 'The longitude field format is invalid.'
+                properties:
+                  message:
+                    type: string
+                    example: 'The longitude field format is invalid.'
+                  errors:
+                    type: object
+                    properties:
+                      longitude:
+                        type: array
+                        example:
+                          - 'The longitude field format is invalid.'
+                        items:
+                          type: string
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                latitude:
+                  type: string
+                  description: 'Must match the regex /^[-]?(([0-8]?[0-9])\.(\d+))|(90(\.0+)?)$/.'
+                  example: 27.3)|90.0)
+                longitude:
+                  type: string
+                  description: 'Must match the regex /^[-]?((((1[0-7][0-9])|([0-9]?[0-9]))\.(\d+))|180(\.0+)?)$/.'
+                  example: '-128|72).2675)|180)'
+                distance:
+                  type: number
+                  description: 'Must not be greater than 100.'
+                  example: 10
+              required:
+                - latitude
+                - distance
+      security: []
+tags:
+  -
+    name: Endpoints
+    description: ''
