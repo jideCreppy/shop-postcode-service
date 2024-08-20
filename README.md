@@ -54,7 +54,7 @@ php artisan migrate
 php artisan serve
 ```
 
-# Run console command
+# Running console command
 #### This command will download and process postcode data retrieved as archived files (similar to browser based downloads) from http://parlvid.mysociety.org/os/.
 
 ```
