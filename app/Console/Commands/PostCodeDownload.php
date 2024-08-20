@@ -45,7 +45,7 @@ class PostCodeDownload extends Command
 
         $this->beginDownload($archiveFinalPath);
 
-        // Using a smaller downloaded file sample to parse and store postcodes in the database.
+        // Using a smaller downloaded file sample to parse and store postcodes in the database for the purpose of demonstration.
         $csvPath = storage_path().'/app/public/postcodes/Data/multi_csv/ONSPD_NOV_2022_UK_AB.csv';
 
         $progress->advance();
