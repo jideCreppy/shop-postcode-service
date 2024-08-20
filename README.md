@@ -54,14 +54,14 @@ php artisan migrate
 php artisan serve
 ```
 
-# Run Console Command
+# Run console command
 #### This command will download and process postcode data retrieved as archived files (similar to browser based downloads) from http://parlvid.mysociety.org/os/.
 
 ```
 php artisan postcode:download
 ```
 
-# API Documentation (Scribe)
+# API documentation (Scribe)
 #### For the full API documentation with example requests, responses etc. Make sure the server is running and navigate to http://localhost/docs
 
 #### To regenerate the scribe documentation run the following command in the terminal within the projects' folder:
@@ -70,7 +70,7 @@ php artisan scribe:generate
 ```
 
 
-# A Note on Adding New Stores
+# A Note on adding new stores
 #### Adding new stores requires you to add geo coordinates (latitude, longitude). Using the available data downloaded and stored in the postcodes table you can add the correct geo coordinates for a store. Run the following SQL statement to fetch all valid postcodes saved along with their coordinates.
 
 ```
