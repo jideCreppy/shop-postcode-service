@@ -77,7 +77,7 @@ class PostCodeDownload extends Command
     /**
      * Copy the target postcode archive to the storage directory.
      */
-    public function beginDownload(string $archiveFinalPath): void
+    protected function beginDownload(string $archiveFinalPath): void
     {
         try {
             copy(config('services.postcode.data.url'), $archiveFinalPath);
