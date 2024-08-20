@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\AddShopRequest;
-use App\Http\Requests\ShowShopRequest;
+use App\Http\Requests\SearchShopRequest;
 use App\Http\Resources\ShopResource;
+use App\Models\Postcode;
 use App\Models\Shop;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\DB;
@@ -51,21 +52,26 @@ class ShopController extends Controller
     }
 
     /**
-     * Find stores within a specified distance (in miles)
+     * Search for stores within a specified distance (in miles).
      *
      * @unauthenticated
      *
      * @group Stores API endpoints
      *
-     * @queryParam latitude number required The postcodes geographical latitude. Example: 57.084444
-     * @queryParam longitude number required The postcodes geographical longitude. Example: -2.255708
-     * @queryParam distance number required Max distance (in miles) to nearest shop. Example: 10
-     *
      * @responseFile 200 storage/responses/api/stores/get.post.json
      */
-    public function index(ShowShopRequest $request): AnonymousResourceCollection
+    public function search(SearchShopRequest $request): AnonymousResourceCollection
     {
         $attributes = $request->validated();
+
+        $distance = $request->filled('distance') ? $attributes['distance'] : 10;
+
+        $shopCoordinates = Postcode::selectRaw(
+            '
+                ST_X(geo_coordinates) as longitude,
+                ST_Y(geo_coordinates) as latitude
+            '
+        )->where('postcode', $attributes['postcode'])->firstOrFail();
 
         $query = '
                 id,
@@ -80,13 +86,14 @@ class ShopController extends Controller
                     POINT(?, ?) ,
                     POINT(ST_X(geo_coordinates), ST_Y(geo_coordinates))
                 ) * .000621371192 as distance_in_miles
-               ';
+        ';
 
         $nearestShops = Shop::selectRaw(
             $query,
-            [$attributes['longitude'], $attributes['latitude']]
+            [$shopCoordinates->longitude, $shopCoordinates->latitude]
         )
-            ->havingRaw('distance_in_miles BETWEEN 0 and ?', [$attributes['distance']])
+            ->where('status', Shop::OPEN_STATUS)
+            ->havingRaw('distance_in_miles BETWEEN 0 and ?', [$distance])
             ->orderByRaw('distance_in_miles')
             ->paginate();
 

@@ -9,6 +9,10 @@ class Shop extends Model
 {
     use HasFactory;
 
+    const OPEN_STATUS = 'O';
+
+    const CLOSED_STATUS = 'C';
+
     protected $fillable = [
         'name',
         'geo_coordinates',

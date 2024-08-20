@@ -3,5 +3,7 @@
 use App\Http\Controllers\ShopController;
 use Illuminate\Support\Facades\Route;
 
-Route::post('/shops', [ShopController::class, 'store'])->name('post.store');
-Route::get('/shops', [ShopController::class, 'index'])->name('get.store');
+Route::controller(ShopController::class)->group(function () {
+    Route::post('/shops', 'store')->name('add.store');
+    Route::post('/shops/search', 'search')->name('search.store');
+});

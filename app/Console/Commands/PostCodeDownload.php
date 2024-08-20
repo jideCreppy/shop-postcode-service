@@ -31,43 +31,39 @@ class PostCodeDownload extends Command
     protected $description = 'Fetch and download postcode data';
 
     /**
-     * Execute the console command to download and store postcodes.
+     * Execute console command to download, process and store postcodes.
      */
     public function handle(): void
     {
         $progress = progress(label: 'Downloading postcodes...', steps: 2);
         $progress->start();
 
-        /**
-         * Further improvements could be to move larger file processing to jobs and/or
-         * schedule this as a command.
-         *
-         * Also, a final clean up operation to delete processed files.
-         */
-        $fileName = Str(config('services.postcode.data.url'))->afterLast('/');
-        $finalPath = storage_path().'/app/public/postcode-data-'.$fileName;
-
-        # Using a smaller downloaded file sample to parse and store in the database.
-        $csvPath = storage_path().'/app/public/postcodes/Data/multi_csv/ONSPD_NOV_2022_UK_AB.csv';
-
-        $this->beginDownload($finalPath);
+        $archiveFileName = Str(config('services.postcode.data.url'))->afterLast('/');
+        $archiveFinalPath = storage_path().'/app/public/postcode-data-'.$archiveFileName;
 
         $progress->advance();
 
-        # TODO covert to service and add unit test
+        $this->beginDownload($archiveFinalPath);
+
+        // Using a smaller downloaded file sample to parse and store postcodes in the database.
+        $csvPath = storage_path().'/app/public/postcodes/Data/multi_csv/ONSPD_NOV_2022_UK_AB.csv';
+
+        $progress->advance();
+
+        // Account for memory usage and performance. Hence, use Lazy collections and data chunks.
         SimpleExcelReader::create($csvPath)
             ->getRows()
             ->skip(1)
             ->values()
-            ->chunk(100)
-            ->each(function ($rows) { # Account for memory usage performance. Hence, use Lazy collections.
+            ->chunk(200)
+            ->each(function ($rows) {
                 $postcodes = [];
-                $today = now();
+                $createdDate = now();
 
-                foreach ($rows as $key => $value) {
-                    $postcodes[$key]['postcode'] = htmlspecialchars($value['pcd2'], ENT_QUOTES, 'UTF-8', false);
-                    $postcodes[$key]['geo_coordinates'] = DB::raw("ST_SRID(POINT({$value['lat']}, {$value['long']}), 4326)");
-                    $postcodes[$key]['created_at'] = $today;
+                foreach ($rows as $key => $row) {
+                    $postcodes[$key]['postcode'] = htmlspecialchars($row['pcd'], ENT_QUOTES, 'UTF-8', false);
+                    $postcodes[$key]['geo_coordinates'] = DB::raw("ST_SRID(POINT({$row['lat']}, {$row['long']}), 4326)");
+                    $postcodes[$key]['created_at'] = $createdDate;
                 }
 
                 Postcode::insertOrIgnore($postcodes);
@@ -81,14 +77,15 @@ class PostCodeDownload extends Command
     /**
      * Copy the target postcode archive to the storage directory.
      */
-    public function beginDownload(string $finalPath): void
+    public function beginDownload(string $archiveFinalPath): void
     {
-        copy(config('services.postcode.data.url'), $finalPath);
-
-        $archiveHandler = new ZipArchive;
-
         try {
-            $zippedFile = $archiveHandler->open($finalPath);
+            copy(config('services.postcode.data.url'), $archiveFinalPath);
+
+            $archiveHandler = new ZipArchive;
+
+            $zippedFile = $archiveHandler->open($archiveFinalPath);
+
             if ($zippedFile === true) {
                 $archiveHandler->extractTo(storage_path().'/app/public/postcodes/');
                 $archiveHandler->close();
@@ -98,7 +95,7 @@ class PostCodeDownload extends Command
                 exit;
             }
         } catch (Exception $e) {
-            warning('Failed downloading postcode data'.$e->getMessage());
+            warning('Failed downloading postcode data. Error:'.$e->getMessage());
             exit;
         }
     }

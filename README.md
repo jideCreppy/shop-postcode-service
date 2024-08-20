@@ -68,3 +68,22 @@ php artisan postcode:download
 ```
 php artisan scribe:generate
 ```
+
+
+# A Note on Adding New Stores
+#### Adding new stores requires you to add geo coordinates (lat, long). With the available information downloaded and stored in the postcodes table you can add the correct geo coordinate for a store using this information. Run the following SQL statement to fetch all valid postcodes saved along with their coordinates.
+
+```
+SELECT postcode, ST_Y(geo_coordinates) as latitude, ST_X(geo_coordinates) as longitude from postcodes;
+```
+
+# Improvements
+1. Move longer running command execution to queued jobs
+2. Clean up processed archived files
+3. Certain tools like SimpleExcelReader could be moved into a service and resolved. This can help with flexibility when switching between similar packages and adding tests.
+4. Check feasibility of using the Laravel HTTPClient instead of the copy function to download archived files. Laravel HTTP Client provides more testing features.
+5. Add some additional CSV data sanitization before saving to the database
+6. PHPStan for static analysis (code quality)
+7. Laravel Sanctum to create a simple authentication layer (if needed)
+8. Centralised error handling
+9. Add additional MYSQl database for feature tests since SQLite (which is a quick and easy alternative) may not support certain MYSQL functions like POINT to process geography columns.

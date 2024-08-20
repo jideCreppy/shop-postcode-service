@@ -26,7 +26,7 @@ endpoints:
         name: name
         description: 'Must be at least 5 characters. Must not be greater than 100 characters.'
         required: true
-        example: cfgermpfw
+        example: fyvqcppenztxlkoptkax
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -43,7 +43,7 @@ endpoints:
       longitude:
         name: longitude
         description: 'The postcodes longitude. Must match the regex /^[-]?((((1[0-7][0-9])|([0-9]?[0-9]))\.(\d+))|180(\.0+)?)$/.'
-        required: false
+        required: true
         example: '-2.255708'
         type: string
         enumValues: []
@@ -51,12 +51,12 @@ endpoints:
         custom: []
       status:
         name: status
-        description: ''
+        description: 'The status. C for closed and O for open.'
         required: true
-        example: X
+        example: O
         type: string
         enumValues:
-          - X
+          - C
           - O
         exampleWasSpecified: false
         custom: []
@@ -76,18 +76,18 @@ endpoints:
         name: max_delivery_distance
         description: 'Must be at least 0. Must not be greater than 100.'
         required: true
-        example: 7
+        example: 11
         type: integer
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      name: cfgermpfw
+      name: fyvqcppenztxlkoptkax
       latitude: '57.084444'
       longitude: '-2.255708'
-      status: X
+      status: O
       store_type: shop
-      max_delivery_distance: 7
+      max_delivery_distance: 11
     fileParameters: []
     responses:
       -
@@ -120,14 +120,14 @@ endpoints:
     custom: []
   -
     httpMethods:
-      - GET
-    uri: api/shops
+      - POST
+    uri: api/shops/search
     metadata:
       groupName: 'Stores API endpoints'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Find stores within a specified distance (in miles)'
+      title: 'Search for stores within a specified distance (in miles).'
       description: ''
       authenticated: false
       custom: []
@@ -136,53 +136,14 @@ endpoints:
       Accept: application/json
     urlParameters: []
     cleanUrlParameters: []
-    queryParameters:
-      latitude:
-        name: latitude
-        description: 'The postcodes geographical latitude.'
-        required: true
-        example: 57.084444
-        type: number
-        enumValues: []
-        exampleWasSpecified: true
-        custom: []
-      longitude:
-        name: longitude
-        description: 'The postcodes geographical longitude.'
-        required: true
-        example: -2.255708
-        type: number
-        enumValues: []
-        exampleWasSpecified: true
-        custom: []
-      distance:
-        name: distance
-        description: 'Max distance (in miles) to nearest shop.'
-        required: true
-        example: 10.0
-        type: number
-        enumValues: []
-        exampleWasSpecified: true
-        custom: []
-    cleanQueryParameters:
-      latitude: 57.084444
-      longitude: -2.255708
-      distance: 10.0
+    queryParameters: []
+    cleanQueryParameters: []
     bodyParameters:
-      latitude:
-        name: latitude
-        description: 'Must match the regex /^[-]?(([0-8]?[0-9])\.(\d+))|(90(\.0+)?)$/.'
+      postcode:
+        name: postcode
+        description: 'Must match the regex /^([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9][A-Za-z]?))))\s?[0-9][A-Za-z]{2})$/.'
         required: true
-        example: 9.5)|)
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        custom: []
-      longitude:
-        name: longitude
-        description: 'Must match the regex /^[-]?((((1[0-7][0-9])|([0-9]?[0-9]))\.(\d+))|180(\.0+)?)$/.'
-        required: false
-        example: '-143|52).44)|180.00)'
+        example: 'GIr 0AA|Q04|xg94|v4T|cq4j)))s1jW)'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -190,16 +151,15 @@ endpoints:
       distance:
         name: distance
         description: 'Must not be greater than 100.'
-        required: true
-        example: 25
+        required: false
+        example: 18
         type: number
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      latitude: 9.5)|)
-      longitude: '-143|52).44)|180.00)'
-      distance: 25
+      postcode: 'GIr 0AA|Q04|xg94|v4T|cq4j)))s1jW)'
+      distance: 18
     fileParameters: []
     responses:
       -
