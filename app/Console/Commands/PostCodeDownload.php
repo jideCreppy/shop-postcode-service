@@ -50,7 +50,7 @@ class PostCodeDownload extends Command
 
         $progress->advance();
 
-        // Account for memory usage and performance. Hence, use Lazy collections and data chunks.
+        // Account for memory usage and performance. Hence, use Lazy collections and data chunks to assist with DB inserts.
         SimpleExcelReader::create($csvPath)
             ->getRows()
             ->skip(1)
