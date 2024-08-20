@@ -66,16 +66,16 @@
                     <a href="#authenticating-requests">Authenticating requests</a>
                 </li>
                             </ul>
-                    <ul id="tocify-header-stores-api-endpoints" class="tocify-header">
-                <li class="tocify-item level-1" data-unique="stores-api-endpoints">
-                    <a href="#stores-api-endpoints">Stores API endpoints</a>
+                    <ul id="tocify-header-shops-api-endpoints" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="shops-api-endpoints">
+                    <a href="#shops-api-endpoints">Shops API endpoints</a>
                 </li>
-                                    <ul id="tocify-subheader-stores-api-endpoints" class="tocify-subheader">
-                                                    <li class="tocify-item level-2" data-unique="stores-api-endpoints-POSTapi-shops">
-                                <a href="#stores-api-endpoints-POSTapi-shops">Add a new store</a>
+                                    <ul id="tocify-subheader-shops-api-endpoints" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="shops-api-endpoints-POSTapi-shops">
+                                <a href="#shops-api-endpoints-POSTapi-shops">Add a new shop</a>
                             </li>
-                                                                                <li class="tocify-item level-2" data-unique="stores-api-endpoints-POSTapi-shops-search">
-                                <a href="#stores-api-endpoints-POSTapi-shops-search">Search for stores within a specified distance (in miles).</a>
+                                                                                <li class="tocify-item level-2" data-unique="shops-api-endpoints-POSTapi-shops-search">
+                                <a href="#shops-api-endpoints-POSTapi-shops-search">Search for shops within a specified distance (in miles).</a>
                             </li>
                                                                         </ul>
                             </ul>
@@ -107,11 +107,11 @@ You can switch the language used with the tabs at the top right (or from the nav
         <h1 id="authenticating-requests">Authenticating requests</h1>
 <p>This API is not authenticated.</p>
 
-        <h1 id="stores-api-endpoints">Stores API endpoints</h1>
+        <h1 id="shops-api-endpoints">Shops API endpoints</h1>
 
     
 
-                                <h2 id="stores-api-endpoints-POSTapi-shops">Add a new store</h2>
+                                <h2 id="shops-api-endpoints-POSTapi-shops">Add a new shop</h2>
 
 <p>
 </p>
@@ -128,12 +128,12 @@ You can switch the language used with the tabs at the top right (or from the nav
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"name\": \"fyvqcppenztxlkoptkax\",
+    \"name\": \"yesclauxqukxwnyjm\",
     \"latitude\": \"57.084444\",
     \"longitude\": \"-2.255708\",
     \"status\": \"O\",
     \"store_type\": \"shop\",
-    \"max_delivery_distance\": 11
+    \"max_delivery_distance\": 4
 }"
 </code></pre></div>
 
@@ -149,12 +149,12 @@ const headers = {
 };
 
 let body = {
-    "name": "fyvqcppenztxlkoptkax",
+    "name": "yesclauxqukxwnyjm",
     "latitude": "57.084444",
     "longitude": "-2.255708",
     "status": "O",
     "store_type": "shop",
-    "max_delivery_distance": 11
+    "max_delivery_distance": 4
 };
 
 fetch(url, {
@@ -175,13 +175,13 @@ fetch(url, {
     &quot;id&quot;: 1,
     &quot;type&quot;: &quot;shop&quot;,
     &quot;attributes&quot;: {
-        &quot;name&quot;: &quot;Garrys Value Store&quot;,
+        &quot;name&quot;: &quot;Bens Super Store&quot;,
         &quot;latitude&quot;: 57.084444,
         &quot;longitude&quot;: -2.255708,
         &quot;status&quot;: &quot;O&quot;,
-        &quot;max_delivery_distance&quot;: 100,
-        &quot;created_at&quot;: &quot;2024-08-19T17:30:50.000000Z&quot;,
-        &quot;updated_at&quot;: null
+        &quot;maxDeliveryDistance&quot;: 100,
+        &quot;createdAt&quot;: &quot;2024-08-20T11:05:17.000000Z&quot;,
+        &quot;updatedAt&quot;: null
     },
     &quot;relationships&quot;: [],
     &quot;includes&quot;: [],
@@ -265,10 +265,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="name"                data-endpoint="POSTapi-shops"
-               value="fyvqcppenztxlkoptkax"
+               value="yesclauxqukxwnyjm"
                data-component="body">
     <br>
-<p>Must be at least 5 characters. Must not be greater than 100 characters. Example: <code>fyvqcppenztxlkoptkax</code></p>
+<p>Must be at least 5 characters. Must not be greater than 100 characters. Example: <code>yesclauxqukxwnyjm</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>latitude</code></b>&nbsp;&nbsp;
@@ -324,14 +324,14 @@ Must be one of:
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="max_delivery_distance"                data-endpoint="POSTapi-shops"
-               value="11"
+               value="4"
                data-component="body">
     <br>
-<p>Must be at least 0. Must not be greater than 100. Example: <code>11</code></p>
+<p>Must be at least 0. Must not be greater than 100. Example: <code>4</code></p>
         </div>
         </form>
 
-                    <h2 id="stores-api-endpoints-POSTapi-shops-search">Search for stores within a specified distance (in miles).</h2>
+                    <h2 id="shops-api-endpoints-POSTapi-shops-search">Search for shops within a specified distance (in miles).</h2>
 
 <p>
 </p>
@@ -348,8 +348,8 @@ Must be one of:
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"postcode\": \"GIr 0AA|Q04|xg94|v4T|cq4j)))s1jW)\",
-    \"distance\": 18
+    \"postcode\": \"gIR 0aa|x2|vf98|K4t|vd3l)))3kG)\",
+    \"distance\": 16
 }"
 </code></pre></div>
 
@@ -365,8 +365,8 @@ const headers = {
 };
 
 let body = {
-    "postcode": "GIr 0AA|Q04|xg94|v4T|cq4j)))s1jW)",
-    "distance": 18
+    "postcode": "gIR 0aa|x2|vf98|K4t|vd3l)))3kG)",
+    "distance": 16
 };
 
 fetch(url, {
@@ -388,13 +388,13 @@ fetch(url, {
         &quot;id&quot;: 1,
         &quot;type&quot;: &quot;shop&quot;,
         &quot;attributes&quot;: {
-            &quot;name&quot;: &quot;Garrys Value Store&quot;,
+            &quot;name&quot;: &quot;Tesco Value Store&quot;,
             &quot;latitude&quot;: 57.084444,
             &quot;longitude&quot;: -2.255708,
             &quot;status&quot;: &quot;O&quot;,
-            &quot;max_delivery_distance&quot;: 100,
-            &quot;created_at&quot;: &quot;2024-08-19T17:30:50.000000Z&quot;,
-            &quot;updated_at&quot;: null
+            &quot;maxDeliveryDistance&quot;: 100,
+            &quot;createdAt&quot;: &quot;2024-08-20T11:05:17.000000Z&quot;,
+            &quot;updatedAt&quot;: null
         },
         &quot;relationships&quot;: [],
         &quot;includes&quot;: [],
@@ -408,9 +408,9 @@ fetch(url, {
             &quot;latitude&quot;: 57.084444,
             &quot;longitude&quot;: -2.255708,
             &quot;status&quot;: &quot;O&quot;,
-            &quot;max_delivery_distance&quot;: 100,
-            &quot;created_at&quot;: &quot;2024-08-19T17:32:56.000000Z&quot;,
-            &quot;updated_at&quot;: null
+            &quot;maxDeliveryDistance&quot;: 100,
+            &quot;createdAt&quot;: &quot;2024-08-20T11:05:17.000000Z&quot;,
+            &quot;updatedAt&quot;: null
         },
         &quot;relationships&quot;: [],
         &quot;includes&quot;: [],
@@ -495,10 +495,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="postcode"                data-endpoint="POSTapi-shops-search"
-               value="GIr 0AA|Q04|xg94|v4T|cq4j)))s1jW)"
+               value="gIR 0aa|x2|vf98|K4t|vd3l)))3kG)"
                data-component="body">
     <br>
-<p>Must match the regex /^([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9][A-Za-z]?))))\s?[0-9][A-Za-z]{2})$/. Example: <code>GIr 0AA|Q04|xg94|v4T|cq4j)))s1jW)</code></p>
+<p>Must match the regex /^([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9][A-Za-z]?))))\s?[0-9][A-Za-z]{2})$/. Example: <code>gIR 0aa|x2|vf98|K4t|vd3l)))3kG)</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>distance</code></b>&nbsp;&nbsp;
@@ -506,10 +506,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="distance"                data-endpoint="POSTapi-shops-search"
-               value="18"
+               value="16"
                data-component="body">
     <br>
-<p>Must not be greater than 100. Example: <code>18</code></p>
+<p>Must not be greater than 100. Example: <code>16</code></p>
         </div>
         </form>
 

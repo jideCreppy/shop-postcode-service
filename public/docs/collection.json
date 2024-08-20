@@ -10,17 +10,17 @@
     ],
     "info": {
         "name": "Creppy Postcode Service",
-        "_postman_id": "d27a6f40-111b-4ec4-99cd-042eb5aeff7e",
+        "_postman_id": "b3a5d53a-d168-4558-93d7-16bfb22452e6",
         "description": "SnappyShopper - Code Test API Doc",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
     "item": [
         {
-            "name": "Stores API endpoints",
+            "name": "Shops API endpoints",
             "description": "",
             "item": [
                 {
-                    "name": "Add a new store",
+                    "name": "Add a new shop",
                     "request": {
                         "url": {
                             "host": "{{baseUrl}}",
@@ -41,7 +41,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"name\":\"fyvqcppenztxlkoptkax\",\"latitude\":\"57.084444\",\"longitude\":\"-2.255708\",\"status\":\"O\",\"store_type\":\"shop\",\"max_delivery_distance\":11}"
+                            "raw": "{\"name\":\"yesclauxqukxwnyjm\",\"latitude\":\"57.084444\",\"longitude\":\"-2.255708\",\"status\":\"O\",\"store_type\":\"shop\",\"max_delivery_distance\":4}"
                         },
                         "description": "",
                         "auth": {
@@ -52,13 +52,13 @@
                         {
                             "header": [],
                             "code": 200,
-                            "body": "{\n    \"id\": 1,\n    \"type\": \"shop\",\n    \"attributes\": {\n        \"name\": \"Garrys Value Store\",\n        \"latitude\": 57.084444,\n        \"longitude\": -2.255708,\n        \"status\": \"O\",\n        \"max_delivery_distance\": 100,\n        \"created_at\": \"2024-08-19T17:30:50.000000Z\",\n        \"updated_at\": null\n    },\n    \"relationships\": [],\n    \"includes\": [],\n    \"links\": []\n}\n",
+                            "body": "{\n    \"id\": 1,\n    \"type\": \"shop\",\n    \"attributes\": {\n        \"name\": \"Bens Super Store\",\n        \"latitude\": 57.084444,\n        \"longitude\": -2.255708,\n        \"status\": \"O\",\n        \"maxDeliveryDistance\": 100,\n        \"createdAt\": \"2024-08-20T11:05:17.000000Z\",\n        \"updatedAt\": null\n    },\n    \"relationships\": [],\n    \"includes\": [],\n    \"links\": []\n}\n",
                             "name": ""
                         }
                     ]
                 },
                 {
-                    "name": "Search for stores within a specified distance (in miles).",
+                    "name": "Search for shops within a specified distance (in miles).",
                     "request": {
                         "url": {
                             "host": "{{baseUrl}}",
@@ -79,7 +79,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"postcode\":\"GIr 0AA|Q04|xg94|v4T|cq4j)))s1jW)\",\"distance\":18}"
+                            "raw": "{\"postcode\":\"gIR 0aa|x2|vf98|K4t|vd3l)))3kG)\",\"distance\":16}"
                         },
                         "description": "",
                         "auth": {
@@ -90,7 +90,7 @@
                         {
                             "header": [],
                             "code": 200,
-                            "body": "[\n    {\n        \"id\": 1,\n        \"type\": \"shop\",\n        \"attributes\": {\n            \"name\": \"Garrys Value Store\",\n            \"latitude\": 57.084444,\n            \"longitude\": -2.255708,\n            \"status\": \"O\",\n            \"max_delivery_distance\": 100,\n            \"created_at\": \"2024-08-19T17:30:50.000000Z\",\n            \"updated_at\": null\n        },\n        \"relationships\": [],\n        \"includes\": [],\n        \"links\": []\n    },\n    {\n        \"id\": 2,\n        \"type\": \"shop\",\n        \"attributes\": {\n            \"name\": \"Reds Super Store\",\n            \"latitude\": 57.084444,\n            \"longitude\": -2.255708,\n            \"status\": \"O\",\n            \"max_delivery_distance\": 100,\n            \"created_at\": \"2024-08-19T17:32:56.000000Z\",\n            \"updated_at\": null\n        },\n        \"relationships\": [],\n        \"includes\": [],\n        \"links\": []\n    }\n]\n",
+                            "body": "[\n    {\n        \"id\": 1,\n        \"type\": \"shop\",\n        \"attributes\": {\n            \"name\": \"Tesco Value Store\",\n            \"latitude\": 57.084444,\n            \"longitude\": -2.255708,\n            \"status\": \"O\",\n            \"maxDeliveryDistance\": 100,\n            \"createdAt\": \"2024-08-20T11:05:17.000000Z\",\n            \"updatedAt\": null\n        },\n        \"relationships\": [],\n        \"includes\": [],\n        \"links\": []\n    },\n    {\n        \"id\": 2,\n        \"type\": \"shop\",\n        \"attributes\": {\n            \"name\": \"Reds Super Store\",\n            \"latitude\": 57.084444,\n            \"longitude\": -2.255708,\n            \"status\": \"O\",\n            \"maxDeliveryDistance\": 100,\n            \"createdAt\": \"2024-08-20T11:05:17.000000Z\",\n            \"updatedAt\": null\n        },\n        \"relationships\": [],\n        \"includes\": [],\n        \"links\": []\n    }\n]\n",
                             "name": ""
                         }
                     ]

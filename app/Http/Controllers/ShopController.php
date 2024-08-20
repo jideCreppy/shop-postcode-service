@@ -13,11 +13,11 @@ use Illuminate\Support\Facades\DB;
 class ShopController extends Controller
 {
     /**
-     * Add a new store
+     * Add a new shop
      *
      * @unauthenticated
      *
-     * @group Stores API endpoints
+     * @group Shops API endpoints
      *
      * @responseFile 200 storage/responses/api/stores/store.post.json
      */
@@ -52,11 +52,11 @@ class ShopController extends Controller
     }
 
     /**
-     * Search for stores within a specified distance (in miles).
+     * Search for shops within a specified distance (in miles).
      *
      * @unauthenticated
      *
-     * @group Stores API endpoints
+     * @group Shops API endpoints
      *
      * @responseFile 200 storage/responses/api/stores/get.post.json
      */

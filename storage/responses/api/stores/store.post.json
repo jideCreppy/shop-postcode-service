@@ -2,13 +2,13 @@
     "id": 1,
     "type": "shop",
     "attributes": {
-        "name": "Garrys Value Store",
+        "name": "Bens Super Store",
         "latitude": 57.084444,
         "longitude": -2.255708,
         "status": "O",
-        "max_delivery_distance": 100,
-        "created_at": "2024-08-19T17:30:50.000000Z",
-        "updated_at": null
+        "maxDeliveryDistance": 100,
+        "createdAt": "2024-08-20T11:05:17.000000Z",
+        "updatedAt": null
     },
     "relationships": [],
     "includes": [],

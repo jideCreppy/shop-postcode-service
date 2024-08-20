@@ -9,8 +9,8 @@ servers:
 paths:
   /api/shops:
     post:
-      summary: 'Add a new store'
-      operationId: addANewStore
+      summary: 'Add a new shop'
+      operationId: addANewShop
       description: ''
       parameters: []
       responses:
@@ -24,13 +24,13 @@ paths:
                   id: 1
                   type: shop
                   attributes:
-                    name: 'Garrys Value Store'
+                    name: 'Bens Super Store'
                     latitude: 57.084444
                     longitude: -2.255708
                     status: O
-                    max_delivery_distance: 100
-                    created_at: '2024-08-19T17:30:50.000000Z'
-                    updated_at: null
+                    maxDeliveryDistance: 100
+                    createdAt: '2024-08-20T11:05:17.000000Z'
+                    updatedAt: null
                   relationships: []
                   includes: []
                   links: []
@@ -46,7 +46,7 @@ paths:
                     properties:
                       name:
                         type: string
-                        example: 'Garrys Value Store'
+                        example: 'Bens Super Store'
                       latitude:
                         type: number
                         example: 57.084444
@@ -56,13 +56,13 @@ paths:
                       status:
                         type: string
                         example: O
-                      max_delivery_distance:
+                      maxDeliveryDistance:
                         type: integer
                         example: 100
-                      created_at:
+                      createdAt:
                         type: string
-                        example: '2024-08-19T17:30:50.000000Z'
-                      updated_at:
+                        example: '2024-08-20T11:05:17.000000Z'
+                      updatedAt:
                         type: string
                         example: null
                   relationships:
@@ -75,7 +75,7 @@ paths:
                     type: array
                     example: []
       tags:
-        - 'Stores API endpoints'
+        - 'Shops API endpoints'
       requestBody:
         required: true
         content:
@@ -86,7 +86,7 @@ paths:
                 name:
                   type: string
                   description: 'Must be at least 5 characters. Must not be greater than 100 characters.'
-                  example: fyvqcppenztxlkoptkax
+                  example: yesclauxqukxwnyjm
                 latitude:
                   type: string
                   description: 'The postcodes latitude. Must match the regex /^[-]?(([0-8]?[0-9])\.(\d+))|(90(\.0+)?)$/.'
@@ -113,7 +113,7 @@ paths:
                 max_delivery_distance:
                   type: integer
                   description: 'Must be at least 0. Must not be greater than 100.'
-                  example: 11
+                  example: 4
               required:
                 - name
                 - latitude
@@ -124,8 +124,8 @@ paths:
       security: []
   /api/shops/search:
     post:
-      summary: 'Search for stores within a specified distance (in miles).'
-      operationId: searchForStoresWithinASpecifiedDistanceinMiles
+      summary: 'Search for shops within a specified distance (in miles).'
+      operationId: searchForShopsWithinASpecifiedDistanceinMiles
       description: ''
       parameters: []
       responses:
@@ -142,13 +142,13 @@ paths:
                     id: 1
                     type: shop
                     attributes:
-                      name: 'Garrys Value Store'
+                      name: 'Tesco Value Store'
                       latitude: 57.084444
                       longitude: -2.255708
                       status: O
-                      max_delivery_distance: 100
-                      created_at: '2024-08-19T17:30:50.000000Z'
-                      updated_at: null
+                      maxDeliveryDistance: 100
+                      createdAt: '2024-08-20T11:05:17.000000Z'
+                      updatedAt: null
                     relationships: []
                     includes: []
                     links: []
@@ -160,14 +160,14 @@ paths:
                       latitude: 57.084444
                       longitude: -2.255708
                       status: O
-                      max_delivery_distance: 100
-                      created_at: '2024-08-19T17:32:56.000000Z'
-                      updated_at: null
+                      maxDeliveryDistance: 100
+                      createdAt: '2024-08-20T11:05:17.000000Z'
+                      updatedAt: null
                     relationships: []
                     includes: []
                     links: []
       tags:
-        - 'Stores API endpoints'
+        - 'Shops API endpoints'
       requestBody:
         required: true
         content:
@@ -178,15 +178,15 @@ paths:
                 postcode:
                   type: string
                   description: 'Must match the regex /^([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9][A-Za-z]?))))\s?[0-9][A-Za-z]{2})$/.'
-                  example: 'GIr 0AA|Q04|xg94|v4T|cq4j)))s1jW)'
+                  example: 'gIR 0aa|x2|vf98|K4t|vd3l)))3kG)'
                 distance:
                   type: number
                   description: 'Must not be greater than 100.'
-                  example: 18
+                  example: 16
               required:
                 - postcode
       security: []
 tags:
   -
-    name: 'Stores API endpoints'
+    name: 'Shops API endpoints'
     description: ''

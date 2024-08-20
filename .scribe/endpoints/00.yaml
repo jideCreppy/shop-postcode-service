@@ -1,4 +1,4 @@
-name: 'Stores API endpoints'
+name: 'Shops API endpoints'
 description: ''
 endpoints:
   -
@@ -6,11 +6,11 @@ endpoints:
       - POST
     uri: api/shops
     metadata:
-      groupName: 'Stores API endpoints'
+      groupName: 'Shops API endpoints'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Add a new store'
+      title: 'Add a new shop'
       description: ''
       authenticated: false
       custom: []
@@ -26,7 +26,7 @@ endpoints:
         name: name
         description: 'Must be at least 5 characters. Must not be greater than 100 characters.'
         required: true
-        example: fyvqcppenztxlkoptkax
+        example: yesclauxqukxwnyjm
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -76,18 +76,18 @@ endpoints:
         name: max_delivery_distance
         description: 'Must be at least 0. Must not be greater than 100.'
         required: true
-        example: 11
+        example: 4
         type: integer
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      name: fyvqcppenztxlkoptkax
+      name: yesclauxqukxwnyjm
       latitude: '57.084444'
       longitude: '-2.255708'
       status: O
       store_type: shop
-      max_delivery_distance: 11
+      max_delivery_distance: 4
     fileParameters: []
     responses:
       -
@@ -97,13 +97,13 @@ endpoints:
               "id": 1,
               "type": "shop",
               "attributes": {
-                  "name": "Garrys Value Store",
+                  "name": "Bens Super Store",
                   "latitude": 57.084444,
                   "longitude": -2.255708,
                   "status": "O",
-                  "max_delivery_distance": 100,
-                  "created_at": "2024-08-19T17:30:50.000000Z",
-                  "updated_at": null
+                  "maxDeliveryDistance": 100,
+                  "createdAt": "2024-08-20T11:05:17.000000Z",
+                  "updatedAt": null
               },
               "relationships": [],
               "includes": [],
@@ -123,11 +123,11 @@ endpoints:
       - POST
     uri: api/shops/search
     metadata:
-      groupName: 'Stores API endpoints'
+      groupName: 'Shops API endpoints'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Search for stores within a specified distance (in miles).'
+      title: 'Search for shops within a specified distance (in miles).'
       description: ''
       authenticated: false
       custom: []
@@ -143,7 +143,7 @@ endpoints:
         name: postcode
         description: 'Must match the regex /^([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9][A-Za-z]?))))\s?[0-9][A-Za-z]{2})$/.'
         required: true
-        example: 'GIr 0AA|Q04|xg94|v4T|cq4j)))s1jW)'
+        example: 'gIR 0aa|x2|vf98|K4t|vd3l)))3kG)'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -152,14 +152,14 @@ endpoints:
         name: distance
         description: 'Must not be greater than 100.'
         required: false
-        example: 18
+        example: 16
         type: number
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      postcode: 'GIr 0AA|Q04|xg94|v4T|cq4j)))s1jW)'
-      distance: 18
+      postcode: 'gIR 0aa|x2|vf98|K4t|vd3l)))3kG)'
+      distance: 16
     fileParameters: []
     responses:
       -
@@ -170,13 +170,13 @@ endpoints:
                   "id": 1,
                   "type": "shop",
                   "attributes": {
-                      "name": "Garrys Value Store",
+                      "name": "Tesco Value Store",
                       "latitude": 57.084444,
                       "longitude": -2.255708,
                       "status": "O",
-                      "max_delivery_distance": 100,
-                      "created_at": "2024-08-19T17:30:50.000000Z",
-                      "updated_at": null
+                      "maxDeliveryDistance": 100,
+                      "createdAt": "2024-08-20T11:05:17.000000Z",
+                      "updatedAt": null
                   },
                   "relationships": [],
                   "includes": [],
@@ -190,9 +190,9 @@ endpoints:
                       "latitude": 57.084444,
                       "longitude": -2.255708,
                       "status": "O",
-                      "max_delivery_distance": 100,
-                      "created_at": "2024-08-19T17:32:56.000000Z",
-                      "updated_at": null
+                      "maxDeliveryDistance": 100,
+                      "createdAt": "2024-08-20T11:05:17.000000Z",
+                      "updatedAt": null
                   },
                   "relationships": [],
                   "includes": [],
