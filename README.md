@@ -1,18 +1,18 @@
 # Shop Postcode Service (UK)
 
-### This project combines the power of both the Laravel console and backend API functionality to download, parse, save and interact with saved postcode information
+### This project leverages the capabilities of both the Laravel console and backend API to download, parse, store, and interact with postcode and location data.
 
-1. Console command to download and import UK postcodes (e.g.
-   http://parlvid.mysociety.org/os/) into some kind of database
-2. A controller action to add a new store/shop to the database with:
+1. Console command to download and import UK postcodes (data source:
+   http://parlvid.mysociety.org/os/) into a MySQL database
+2. A controller action to add a new shop to the database with the following details:
    1. Name
    2. Geo coordinates
-   3. store type (takeaway, shop, restaurant)
-   4. a max delivery distance.
+   3. Store type (takeaway, shop, restaurant)
+   4. ax delivery distance.
 3. Controller action to return stores near to a postcode (latitude, longitude) as a JSON
    API response
 4. Controller action to return stores can deliver to a certain postcode as a JSON API
-   response - TODO
+   response - **TODO**
 
 ## Dependencies
 1. PHP 8.2
@@ -45,7 +45,8 @@ DB_PASSWORD=password
 ```
 #### Note: If you run into DB connection issues with the host name (DB_HOST) set as mysql you can substitute the host name (DB_HOST) for 0.0.0.0 which is the default docker network bridge IP.
 
-### Open a new terminal to create, start and seed the database server. Also, the following commands will create and start a local mail server and serve the application.
+# Starting the application
+#### Open a new terminal to set up and start both the database and local web server. Run:
 
 ```
 sail up -d
@@ -54,14 +55,13 @@ php artisan serve
 ```
 
 # Run Console Command
-#### This command will download specific archived postcode data from http://parlvid.mysociety.org/os/ as a compressed zip file.
-#### And extract postcode information from a CSV file which is then added to the database.
+#### This command will download and process postcode data retrieved as archived files (similar to browser based downloads) from http://parlvid.mysociety.org/os/.
 
 ```
 php artisan postcode:download
 ```
 
-# API Documentation
+# API Documentation (Scribe)
 #### For the full API documentation with example requests, responses etc. Make sure the server is running and navigate to http://localhost/docs
 
 #### To regenerate the scribe documentation run the following command in the terminal within the projects' folder:
@@ -71,7 +71,7 @@ php artisan scribe:generate
 
 
 # A Note on Adding New Stores
-#### Adding new stores requires you to add geo coordinates (lat, long). With the available information downloaded and stored in the postcodes table you can add the correct geo coordinate for a store using this information. Run the following SQL statement to fetch all valid postcodes saved along with their coordinates.
+#### Adding new stores requires you to add geo coordinates (latitude, longitude). Using the available data downloaded and stored in the postcodes table you can add the correct geo coordinates for a store. Run the following SQL statement to fetch all valid postcodes saved along with their coordinates.
 
 ```
 SELECT postcode, ST_Y(geo_coordinates) as latitude, ST_X(geo_coordinates) as longitude from postcodes;
@@ -86,4 +86,4 @@ SELECT postcode, ST_Y(geo_coordinates) as latitude, ST_X(geo_coordinates) as lon
 6. PHPStan for static analysis (code quality)
 7. Laravel Sanctum to create a simple authentication layer (if needed)
 8. Centralised error handling
-9. Add additional MYSQl database for feature tests since SQLite (which is a quick and easy alternative) may not support certain MYSQL functions like POINT to process geography columns.
+9. Add additional MySQL database to docker-compose.yml for feature tests since SQLite (which is a quick and easy alternative to add test db's) may not support certain MYSQL functions like POINT to process geography columns.
