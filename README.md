@@ -60,7 +60,7 @@ php artisan serve
 ```
 php artisan postcode:download
 ```
-#### This operation performs a number of operations which including downloading and un-archiving the downloaded file from the internet, processing data stored in a CSV file and storing the information in the database. It will take under a minute to run. 
+#### The above command performs a number of operations which includes downloading and un-archiving the downloaded file from the internet, processing data stored in a CSV file and storing the information in the database. It will take under a minute to run. 
 
 # API documentation (Scribe)
 #### For the full API documentation with example requests, responses etc. Make sure the server is running and navigate to http://localhost/docs
