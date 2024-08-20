@@ -1,4 +1,4 @@
-# Store Postcode Service (UK)
+# Shop Postcode Service (UK)
 
 ### This project combines the power of both the Laravel console and backend API functionality to download, parse, save and interact with saved postcode information
 
