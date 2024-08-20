@@ -71,7 +71,7 @@ php artisan scribe:generate
 ```
 
 
-# A Note on adding new stores
+# A note on adding new stores
 #### Adding new stores requires you to add geo coordinates (latitude, longitude). Using the available data downloaded and stored in the postcodes table you can add the correct geo coordinates for a store. Run the following SQL statement to fetch all valid postcodes saved along with their coordinates.
 
 ```
